@@ -4,15 +4,16 @@ import { styles } from './style'
 
 interface PropsComponent {
   title: string;
+  onChangeValue: (email: string, password: string) => void;
 }
 
-export function ButtonComponent({ title }: PropsComponent) {
+export function ButtonComponent({ title, onChangeValue }: PropsComponent) {
 
   return (
-    <View>
-      <TouchableOpacity style={styles.buttonstyles}>
+    <>
+      <TouchableOpacity style={styles.buttonstyles} onPress={() => onChangeValue}>
         <Text style={styles.textButton}>{title}</Text>
       </TouchableOpacity>
-    </View>
+    </>
   )
 }

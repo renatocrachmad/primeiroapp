@@ -1,4 +1,4 @@
-App.tsx
+
 import { StatusBar } from 'expo-status-bar';
 import {Home} from './src/pages/home';
 

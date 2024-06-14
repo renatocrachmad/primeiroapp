@@ -5,15 +5,18 @@ import { styles } from './style'
 interface PropsComponent {
   placeholder: string;
   type?: boolean;
+  onChangeValue: (value: string) => void;
 }
 
-export function TextInputComponent({ placeholder, type }: PropsComponent) {
+export function TextInputComponent({ placeholder, type, onChangeValue }: PropsComponent) {
   return (
     <TextInput
       placeholder={placeholder}
-      placeholderTextColor={"#000"}
+      placeholderTextColor={"#fff"}
       style={styles.styleInput}
-      secureTextEntry={type}      
+      secureTextEntry={type}
+      onChangeText={onChangeValue}
     />
   )
 }
+
