@@ -1,51 +1,43 @@
 import React, { useState } from 'react'
-import { Image, Keyboard, Text, TouchableOpacity, TouchableWithoutFeedback, TouchableWithoutFeedbackBase, View } from 'react-native'
-import { ButtonComponent } from '../../components/ButtonComponent'
+import { Button, FlatList, Text, View } from 'react-native'
+import { CardFlatlist } from '../../Components/CardFlatlist'
+import { useNavigation } from '@react-navigation/native';
 import { styles } from './style'
-import { TextInputComponent } from '../../components/TextInput'
-import Banner from '../../assets/banner.webp'
-
 
 export function Home() {
 
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const navigator = useNavigation();
 
-  const handleEmail = (value: string) => {
-    setEmail(value);
-  }
+  const data = [
+    { id: 1, title: 'Titulo1' },
+    { id: 2, title: 'Titulo2' },
+    { id: 3, title: 'Titulo3' },
+    { id: 4, title: 'Titulo4' },
+    { id: 5, title: 'Titulo5' },
+    { id: 6, title: 'Titulo6' },
+    { id: 7, title: 'Titulo7' },
+    { id: 8, title: 'Titulo8' },
+    { id: 9, title: 'Titulo9' },
+  ]
 
-  const handlePassword = (value: string) => {
-    setPassword(value)
-  }
-
-  const handleLogin = () => {
-    setPassword(password);
-    setEmail(email);
+  const handleLogout = () => {
+    navigator.navigate("StackLogin", {name: "Login"});
   }
 
   return (
     <View style={styles.container}>
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <Image style={styles.logo} source={Banner} alt="Banner tela login"/>
+      <Text>Home</Text>
 
-          
-          <TextInputComponent
-            placeholder='Digite seu email'
-            onChangeValue={handleEmail}
-          />
+      <Button title="Sair" onPress={handleLogout} />
 
-                    <TextInputComponent
-            onChangeValue={handlePassword}
-            placeholder='Digite sua senha'
-            type={true}
-          />
-
-          <ButtonComponent title="Entrar" onChangeValue={handleLogin} />
-          <ButtonComponent title="Sair" onChangeValue={()=>console.log('sair')} />
-
-          
-      </TouchableWithoutFeedback>
+      <FlatList
+        data={data}
+        renderItem={({ item }) =>
+          <CardFlatlist {...item}/>
+        }
+        keyExtractor={item => item.id.toString()}
+      />
     </View>
   )
 }
+

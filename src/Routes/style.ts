@@ -1,10 +1,15 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'gray',
+  boxNavigation: {
     alignItems: 'center',
+    paddingTop: 15,
     justifyContent: 'center',
   },
+
+  nameRoute: {
+    fontSize: 16,
+    textAlign: 'center',
+    color: "#fff"
+  }
 })

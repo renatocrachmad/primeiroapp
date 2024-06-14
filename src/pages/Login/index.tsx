@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { Image, Keyboard, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
-import { ButtonComponent } from '../../components/ButtonComponent'
-import { TextInputComponent } from '../../components/TextInput'
-import {Banner} from '../../assets/banner.webp'
+import { ButtonComponent } from '../../Components/ButtonComponent'
+import { TextInputComponent } from '../../Components/TextInput'
+import Banner from '../../Assets/banner.webp'
+import { useNavigation } from '@react-navigation/native'
 import { styles } from './style'
 
 export function Login() {
 
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
+  const navigator = useNavigation();
 
   const handleEmail = (value: string) => {
     setEmail(value);
@@ -19,8 +21,7 @@ export function Login() {
   }
 
   const handleLogin = () => {
-    setPassword(password);
-    setEmail(email);
+    navigator.navigate("StackHome", {name: "Home"});
   }
 
   return (
@@ -39,7 +40,7 @@ export function Login() {
           type={true}
         />
 
-        <ButtonComponent title="Entrar" onChangeValue={handleLogin} />
+        <ButtonComponent title="Entrar" handleOnChange={handleLogin}/>
       </View>
     </TouchableWithoutFeedback>
   )
