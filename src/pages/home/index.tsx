@@ -1,43 +1,66 @@
-import React, { useState } from 'react'
-import { Button, FlatList, Text, View } from 'react-native'
-import { CardFlatlist } from '../../Components/CardFlatlist'
-import { useNavigation } from '@react-navigation/native';
+import React, { useEffect, useState } from 'react'
+import { FlatList, Text, View } from 'react-native'
+import { CardFlatlist } from '../../components/CardFlatlist'
+import { TextInputComponent } from '../../components/TextInput'
 import { styles } from './style'
+
+type PropsApi = {
+  id: string;
+  name: string;
+  images: string[];
+}
 
 export function Home() {
 
-  const navigator = useNavigation();
+  const [dataApi, setDataApi] = useState<PropsApi[]>([]);
+  const [filterName, setFilterName] = useState<string>('');
 
-  const data = [
-    { id: 1, title: 'Titulo1' },
-    { id: 2, title: 'Titulo2' },
-    { id: 3, title: 'Titulo3' },
-    { id: 4, title: 'Titulo4' },
-    { id: 5, title: 'Titulo5' },
-    { id: 6, title: 'Titulo6' },
-    { id: 7, title: 'Titulo7' },
-    { id: 8, title: 'Titulo8' },
-    { id: 9, title: 'Titulo9' },
-  ]
+  const loadApi = async () => {
+    const url = 'https://narutodb.xyz/api/akatsuki';
+    
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setDataApi(data.akatsuki)
+    } 
+    catch(error) {
+      console.log('Erro ao buscar a api', error)
+    }
+  };
 
-  const handleLogout = () => {
-    navigator.navigate("StackLogin", {name: "Login"});
+  const handleSearch = (name: string) => {
+    setFilterName(name)
   }
+
+  const resulFilters = dataApi.filter(name => {
+    const inputName = filterName.toLocaleLowerCase();
+    const nameApi = name.name.toLowerCase();
+    return nameApi.includes(inputName);
+  });
+
+
+  useEffect(() => {
+    loadApi();
+  }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Home</Text>
-
-      <Button title="Sair" onPress={handleLogout} />
+      
+      <TextInputComponent 
+        placeholder='Buscar...'
+        onChangeValue={handleSearch}
+      />
 
       <FlatList
-        data={data}
+        data={resulFilters}
         renderItem={({ item }) =>
-          <CardFlatlist {...item}/>
+          <CardFlatlist comovaireceber={item}/>
         }
-        keyExtractor={item => item.id.toString()}
+        keyExtractor={item => item.id}
       />
+      {dataApi.length <= 0 && (
+        <Text>Loading...</Text>
+      )}
     </View>
   )
 }
-

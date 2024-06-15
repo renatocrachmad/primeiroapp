@@ -12,7 +12,7 @@ export function ButtonComponent({title, handleOnChange}: PropsComponent) {
   return (
     <>
       <TouchableOpacity style={styles.buttonstyles} onPress={handleOnChange}>
-        <Text style={styles.textButton}>{ title ? title: "Texto default "}</Text>
+        <Text style={styles.textButton}>{title}</Text>
       </TouchableOpacity>
     </>
   )

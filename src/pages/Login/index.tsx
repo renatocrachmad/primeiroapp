@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import { Image, Keyboard, Text, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native'
-import { ButtonComponent } from '../../Components/ButtonComponent'
-import { TextInputComponent } from '../../Components/TextInput'
+import { ButtonComponent } from '../../components/ButtonComponent'
+import { TextInputComponent } from '../../components/TextInput'
 import Banner from '../../Assets/banner.webp'
 import { useNavigation } from '@react-navigation/native'
-import { styles } from './style'
+import {styles} from './style'
 
 export function Login() {
 

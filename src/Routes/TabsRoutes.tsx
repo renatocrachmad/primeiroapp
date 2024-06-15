@@ -1,9 +1,10 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import React from 'react'
-import { Home } from '../Pages/Home';
-import { Profile } from '../Pages/Profile';
+import { Home } from '../pages/home';
+import { Profile } from '../pages/Profile';
 import { styles } from './style';
 import { Text, View } from 'react-native';
+import Icon from '@expo/vector-icons/Ionicons';
 
 export type RootTabParamsList = {
   TabHome: { name: string };
@@ -30,9 +31,10 @@ export function TabsRoutes() {
         name="TabHome"
         component={Home}
         options={{
-          tabBarIcon: ({focused, size, color}) => (
+          tabBarIcon: ({focused}) => (
             <View style={styles.boxNavigation}>
-              {/* <Icon name="" size={20} color="#000" /> */}
+              <Icon name="home" size={focused ? 25 : 20} color={focused ? "#f00" : "#fff"} />
+              {/* <Text style={styles.nameRoute}>{focused ? "" : "Home"}</Text> */}
               <Text style={styles.nameRoute}>Home</Text>
             </View>
           ),
@@ -45,9 +47,9 @@ export function TabsRoutes() {
         name="TabProfile"
         component={Profile}
         options={{
-          tabBarIcon: ({}) => (
+          tabBarIcon: ({focused}) => (
             <View style={styles.boxNavigation}>
-              {/* <Icon name="" size={20} color="#000" /> */}
+              <Icon name="person" size={focused ? 25 : 20} color={focused ? "#f00" : "#fff"} />
               <Text style={styles.nameRoute}>Profile</Text>
             </View>
           ),
@@ -59,4 +61,3 @@ export function TabsRoutes() {
     </Tab.Navigator>
   )
 }
-

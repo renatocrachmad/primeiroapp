@@ -1,15 +1,24 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Image } from 'react-native'
+import { styles } from './style';
 
-interface PropsComponent {
-  title: string
+type PropsApi = {
+  id: string;
+  name: string;
+  images: string[];
 }
 
-export function CardFlatlist({title}: PropsComponent){
+interface PropsComponent {
+  comovaireceber: PropsApi;
+}
+
+export function CardFlatlist({comovaireceber}: PropsComponent){
   return (
-    <View>
-      <Text>CardFlatlist: {title}</Text>
+    <View style={styles.containerInfo}>
+      <View>
+        <Image style={styles.imagemBeast} source={{ uri: comovaireceber.images[0] }} alt="Foto perfil akatsuki" />
+        <Text style={styles.name}>{comovaireceber.name}</Text>
+      </View>
     </View>
   )
 }
-
